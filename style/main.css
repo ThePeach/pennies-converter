@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Georgia, serif;
+}
+
+.content {
+    width: 700px;
+    margin: 0 auto;
+}
+
+.row:before,
+.row:after {
+    content: " ";
+    display: table;
+}
+
+.row:after {
+    clear: both;
+}
+
+.row {
+    margin-top: 2em;
+}
+.row > * {
+            box-sizing: border-box;
+       -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.col-1 {
+    float: left;
+    width: 30%;
+}
+
+.col-2 {
+    float: left;
+    width: 70%;
+    padding-left: 20px;
+}
+
+.input {
+    text-align: center;
+    background-color: beige;
+    border: 1px solid coral;
+}
+
+.input label {
+    display: block;
+    margin: 1em 0;
+}
+
+.result {
+}
+
+#pennies {
+    width: 70%;
+}
+
+.button {
+    display: block;
+    margin: 1em auto;
+}
