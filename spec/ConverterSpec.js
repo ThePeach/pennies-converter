@@ -14,18 +14,6 @@ describe('Converter', function () {
             ],
             i;
 
-        this.addMatchers({
-            toBeSimilar: function(expected) {
-                var similar = true;
-                for (field in expected) {
-                    if (expected.field !== this.actual.field) {
-                        similar = false;
-                    }
-                }
-                return similar;
-            }
-        });
-
         for (i in values) {
             expect(Converter.convert(values[i])).toBeSimilar(expected[i]);
         }
