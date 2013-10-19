@@ -11,9 +11,7 @@ PENNIES.Validator = (function () {
     function validate(data) {
         var currencySymbol = '\xA3',
             subCurrencySymbol = 'p',
-            regexValidInput = /^\xA3?\d*\.?\d*p?$/,
-            // TODO there should be a better validation regex than the above
-//            regexValidInput = /^\xA3?\(\d+\.?\d+|\d*\.?\d+|\d+\.?\d*)p?$/,
+            regexValidInput = /^\xA3?(\d+\.?\d+|\d*\.?\d+|\d+\.?\d*)p?$/,
             regexPence      = /^\d+\.?\d*p$/,
             regexPoundFull  = /^\xA3\d+\.?\d*p?$/,
             regexInt        = /^\d+$/,
@@ -29,6 +27,7 @@ PENNIES.Validator = (function () {
         }
         // reject any bad input
         else if (data.match(regexValidInput) === null) {
+            messages.push('Bad input format');
             return validated;
         }
 
@@ -60,7 +59,7 @@ PENNIES.Validator = (function () {
             validated = decimalToInt(data);
         }
         // round it to something
-        else {
+        else if (data.match(regexDecimalDot) === null) {
             validated = parseInt(data);
         }
 

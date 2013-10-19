@@ -73,7 +73,7 @@ describe('Validator', function () {
     });
 
     it('should discard non-valid input', function () {
-        var values = [ null, false, '0', '-1', '', 'x', 'x8', '\xA31x.4p', '\xA3p', '\xA3-1.3', '\xA31,3p' ].
+        var values = [ '-1', '', 'x', 'x8', '\xA31x.4p', '\xA3p', '\xA3-1.3', '\xA31,3p' ],
             i;
 
         for (i in values) {
