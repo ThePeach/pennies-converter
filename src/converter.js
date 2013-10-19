@@ -70,7 +70,9 @@ PENNIES.Converter = (function () {
     /**
      * The input should already be formatted as float with max two decimals
      *
-     * @param pennies
+     * FIXME throw something if pennies is not an integer
+     *
+     * @param {Number} pennies
      */
     function convert(pennies) {
         var size, coin,
