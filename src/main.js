@@ -24,7 +24,7 @@
         try {
             pennies = Validator.validate(this.pennies.value);
         } catch (error) {
-            $outputBox.html('<p>'+error.message+'</p>');
+            $outputBox.html('<p class="result-error">'+error.message+'</p>');
             return false;
         }
 
@@ -32,7 +32,7 @@
             $outputBox.empty();
 
             for (i=0; i<Validator.messages.length; i+=1) {
-                $outputBox.append('<p>'+Validator.messages[i]+'</p>');
+                $outputBox.append('<p class="result-error">'+Validator.messages[i]+'</p>');
             }
             return false;
         }
@@ -40,7 +40,7 @@
         try {
             monies = Converter.convert(pennies);
         } catch (error) {
-            $outputBox.html('<p>'+error.message+'</p>');
+            $outputBox.html('<p class="result-error">'+error.message+'</p>');
             return false;
         }
 
