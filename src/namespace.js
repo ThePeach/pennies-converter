@@ -10,6 +10,8 @@ var PENNIES = PENNIES || {};
  * @returns {*|{}}
  */
 PENNIES.namespace = function (ns) {
+    'use strict';
+
     var parts = ns.split('.'),
         parent = PENNIES,
         i;
@@ -27,4 +29,4 @@ PENNIES.namespace = function (ns) {
         parent = parent[parts[i]];
     }
     return parent;
-}
+};
