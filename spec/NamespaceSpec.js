@@ -1,7 +1,10 @@
+/*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, noarg:true, noempty:true, nonew:true, undef:true, strict:true, browser:true */
+/*global PENNIES, describe, it, expect */
 /**
  * Basic set of tests for the namespace utils
  */
 describe('Namespace', function () {
+    'use strict';
 
     it('defines the property if not previously declared', function () {
         PENNIES.namespace('test');
