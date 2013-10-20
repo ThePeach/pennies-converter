@@ -14,6 +14,7 @@
         $outputBox = $('.result');
 
     $('#pennies-converter').submit(function (e) {
+        /*jshint forin:false */
         var pennies,
             monies,
             $resultStack = $('<ul></ul>'),
