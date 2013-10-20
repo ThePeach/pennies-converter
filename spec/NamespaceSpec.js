@@ -11,8 +11,10 @@ describe('Namespace', function () {
         expect(PENNIES.test).toBeDefined();
     });
 
-    it('defines vla', function () {
+    it('defines a long namespace', function () {
         PENNIES.namespace('test2.foo');
+        expect(PENNIES.test2.foo).toBeDefined();
+
         PENNIES.test2.foo = {
             variable: 'test'
         };
