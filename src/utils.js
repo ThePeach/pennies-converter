@@ -36,6 +36,9 @@ PENNIES.utils = (function () {
                 regexDecimalDot = /^\d*\.\d+/,
                 validated = 0;
 
+            if (arguments.length < 1) {
+                throw new Error('No input');
+            }
             // return immediately in case it's a plain decimal
             if (typeof input === 'number' || input.match(regexInt)
             ) {
@@ -113,6 +116,9 @@ PENNIES.utils = (function () {
         var floatSplit, i,
             missingZeroes = 0;
 
+        if (arguments.length < 1) {
+            throw new Error('No input');
+        }
         // set a default value for the precision
         if (arguments.length === 1 || typeof precision !== 'number') {
             precision = 2;
@@ -156,6 +162,9 @@ PENNIES.utils = (function () {
     function roundInt(value, precision) {
         var i, newVal = '';
 
+        if (arguments.length < 1) {
+            throw new Error('No input');
+        }
         if (typeof value === 'number') {
             value = value.toString();
         }

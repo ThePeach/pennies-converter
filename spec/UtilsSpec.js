@@ -86,6 +86,10 @@ describe('Utils', function () {
                 expect(Validator.hasErrors()).toBeTruthy();
             }
         });
+
+        it('should throw an error on empty input', function () {
+            expect(Validator.validate).toThrow(new Error('No input'));
+        });
     });
 
     describe('Conversion utilities', function () {
@@ -101,6 +105,10 @@ describe('Utils', function () {
                     expect(utils.floatToInt(values[i])).toEqual(expected[i]);
                 }
             });
+
+            it('should throw an error on empty input', function () {
+                expect(utils.floatToInt).toThrow(new Error('No input'));
+            });
         });
 
         describe('Round Integer', function () {
@@ -112,6 +120,10 @@ describe('Utils', function () {
                 for (i=0; i<values.length; i+=1) {
                     expect(utils.roundInt(values[i], 2)).toEqual(expected[i]);
                 }
+            });
+
+            it('should throw an error on empty input', function () {
+                expect(utils.roundInt).toThrow(new Error('No input'));
             });
         });
     });
