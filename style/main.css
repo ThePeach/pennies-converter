@@ -23,7 +23,7 @@ code {
 
 /* layout definition */
 .content {
-    width: 700px;
+    width: 550px;
     margin: 0 auto;
 }
 
@@ -86,7 +86,6 @@ code {
     border: 0;
     margin: 0;
     padding: 0;
-    /*list-style-type: circle;*/
 }
 .coin:before {
     display: inline-block;
