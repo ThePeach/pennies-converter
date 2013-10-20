@@ -103,5 +103,16 @@ describe('Utils', function () {
             });
         });
 
+        describe('Round Integer', function () {
+            it('should take an integer and return a rounded version', function () {
+                var values = [ 2, 12, 125, 123, 1234, '1', '12', '125' ],
+                    expected = [ 2, 12, 13, 12, 12, 1, 12, 13 ],
+                    i;
+
+                for (i=0; i<values.length; i+=1) {
+                    expect(utils.roundInt(values[i], 2)).toEqual(expected[i]);
+                }
+            });
+        });
     });
 });

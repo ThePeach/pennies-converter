@@ -147,17 +147,21 @@ PENNIES.utils = (function () {
     }
 
     /**
-     * Will round any integer value to the given amount of numbers
+     * Will round any integer value to the given amount of digits
      *
-     * @param {String} value     the value to round
-     * @param {Number} precision
+     * @param {String|Number} value     the value to round
+     * @param {Number}        precision the number of digits to round to
      * @returns {Number}
      */
     function roundInt(value, precision) {
         var i, newVal = '';
 
-        if (typeof value === 'Number') {
+        if (typeof value === 'number') {
             value = value.toString();
+        }
+        // return in case there's nothing to be rounded
+        if (value.length <= precision) {
+            return parseInt(value, 10);
         }
 
         // let's build a float we can round
@@ -177,6 +181,7 @@ PENNIES.utils = (function () {
     // expose functions
     return {
         floatToInt: floatToInt,
+        roundInt: roundInt,
         Validator: Validator
     };
 })();
