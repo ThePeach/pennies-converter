@@ -1,3 +1,7 @@
+/*
+ * basic global definitions
+ * a reset style can be applied
+ */
 body {
     font-family: Arial, sans-serif;
 }
@@ -6,6 +10,18 @@ h1, h2, h3, h4, h5, h6 {
     font-family: Georgia, serif;
 }
 
+ul > li {
+    list-style-type: none;
+    border-left: 5px solid #5e7d00;
+    padding-left: 1em;
+    margin-bottom: .5em;
+}
+
+code {
+    font-family: unicode;
+}
+
+/* layout definition */
 .content {
     width: 700px;
     margin: 0 auto;
@@ -22,7 +38,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .row {
-    margin-top: 2em;
+    margin: 1em 0;
 }
 .row > * {
             box-sizing: border-box;
@@ -41,26 +57,71 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 20px;
 }
 
+/* input form module */
 .input {
     text-align: center;
     background-color: #F5F5DC;
-    border: 1px solid #FF7F50;
+    border-left: 5px solid #FF7F50;
 }
 
 .input label {
     display: block;
     margin: 1em 0;
 }
+#pennies {
+    width: 70%;
+}
 
+/* result module and subcategories */
+.result-coins {
+    padding: 0;
+}
 .result-error {
     font-style: italic;
     color: #DC143C;
 }
 
-#pennies {
-    width: 70%;
+/* Coin module */
+.coin {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    /*list-style-type: circle;*/
+}
+.coin:before {
+    display: inline-block;
+    content: "\25CF";
+    margin-right: 5px;
+}
+.coin-200:before,
+.coin-100:before {
+    color: #DAA520;
+}
+.coin-50:before,
+.coin-20:before,
+.coin-10:before,
+.coin-5:before {
+    color: #7b7b7b;
+}
+.coin-2:before,
+.coin-1:before {
+    color: #b03911;
 }
 
+.coin > .size {
+    display: inline-block;
+    width: 2em;
+}
+
+.coin > .count {
+    display: inline-block;
+    width: 3em;
+    text-align: right;
+    font-style: italic;
+    color: #333333;
+}
+
+/* button module */
 .button {
     display: block;
     margin: 1em auto;

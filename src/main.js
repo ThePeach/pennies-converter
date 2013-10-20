@@ -17,7 +17,7 @@
         /*jshint forin:false */
         var pennies,
             monies,
-            $resultStack = $('<ul></ul>'),
+            $resultStack = $('<ul class="result-coins"></ul>'),
             i, error;
 
         e.preventDefault();
@@ -46,7 +46,7 @@
         }
 
         for (i in monies) {
-            $resultStack.append('<li>' + monies[i].name + ': x' + monies[i].count + '</li>');
+            $resultStack.append('<li class="coin coin-' + monies[i].value + '"><span class="size">' + monies[i].name + '</span> <span class="count">' + monies[i].count + '</span></li>');
         }
 
         $outputBox.empty().append($resultStack);
