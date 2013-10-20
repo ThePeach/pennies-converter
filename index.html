@@ -18,7 +18,7 @@
         <h2>A basic implementation</h2>
         <div class="row">
             <div class="input col-1">
-                <form name="input" id="pennies-converter">
+                <form name="input" id="pennies-converter" method="post">
                     <label for="pennies">Insert coins:</label>
                     <input type="text" name="pennies" id="pennies" placeholder="e.g. £1.42, 123p"/>
                     <input type="submit" value="Calculate" name="Calculate" class="button" />
@@ -30,7 +30,7 @@
     </div>
     <script type="text/javascript" src="lib/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="src/namespace.js"></script>
-    <script type="text/javascript" src="src/validator.js"></script>
+    <script type="text/javascript" src="src/utils.js"></script>
     <script type="text/javascript" src="src/converter.js"></script>
     <script type="text/javascript" src="src/main.js"></script>
 </body>
