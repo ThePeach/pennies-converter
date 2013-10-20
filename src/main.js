@@ -14,7 +14,6 @@
         $outputBox = $('.result');
 
     $('#pennies-converter').submit(function (e) {
-        /*jshint forin:false */
         var pennies,
             monies,
             $resultStack = $('<ul class="result-coins"></ul>'),
@@ -45,7 +44,7 @@
             return false;
         }
 
-        for (i in monies) {
+        for (i=0; i < monies.length; i+=1) {
             $resultStack.append('<li class="coin coin-' + monies[i].value + '"><span class="size">' + monies[i].name + '</span> <span class="count">' + monies[i].count + '</span></li>');
         }
 
