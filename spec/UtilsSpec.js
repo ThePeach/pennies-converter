@@ -87,4 +87,21 @@ describe('Utils', function () {
             }
         });
     });
+
+    describe('Conversion utilities', function () {
+        var utils = PENNIES.utils;
+
+        describe('Decimal to Integer', function () {
+            it('should take a float and return it as an integer', function () {
+                var values = [ 2, 1.2, '1.2', '0.3', '.3' ],
+                    expected = [ 200, 120, 120, 30, 30 ],
+                    i;
+
+                for (i=0; i<values.length; i+=1) {
+                    expect(utils.floatToInt(values[i])).toEqual(expected[i]);
+                }
+            });
+        });
+
+    });
 });

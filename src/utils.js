@@ -103,20 +103,22 @@ PENNIES.utils = (function () {
      * Will convert a decimal point number into an integer, rounding it when possible.
      * If an integer is passed, it will be returned as float.
      *
-     * @param {String, Number} floatValue  the value with decimal point
+     * @param {String, Number} floatValue  the value with decimal point,
+     *                                     if missing .00 will be assumed
      * @param {Number}         [precision] the precision the resulting integer should be rounded to
      *                                     defaults to 2
      * @returns {Number}
      */
     function floatToInt(floatValue, precision) {
-        var floatSplit, i;
+        var floatSplit, i,
+            missingZeroes = 0;
 
         // set a default value for the precision
-        if (arguments.length === 1 || typeof precision !== 'Number') {
+        if (arguments.length === 1 || typeof precision !== 'number') {
             precision = 2;
         }
         // convert the decimalValue into a string
-        if (typeof floatValue === 'Number') {
+        if (typeof floatValue === 'number') {
             floatValue = floatValue.toString();
         }
 
@@ -129,8 +131,11 @@ PENNIES.utils = (function () {
             floatSplit[1] = '';
         }
 
+        // add missing trailing zeroes
         if (floatSplit[1].length < precision) {
-            for (i=0; i < (precision - floatSplit[1].length); i+=1) {
+            missingZeroes = precision - floatSplit[1].length;
+
+            for (i=0; i < missingZeroes; i+=1) {
                 floatSplit[1] += '0';
             }
         }
@@ -171,6 +176,7 @@ PENNIES.utils = (function () {
 
     // expose functions
     return {
+        floatToInt: floatToInt,
         Validator: Validator
     };
 })();
