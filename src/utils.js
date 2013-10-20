@@ -18,14 +18,15 @@ PENNIES.utils = (function () {
     }
 
     Validator.prototype = (function () {
+        /* jshint validthis: true */
         /**
          * Main function used to validate the input
          *
-         * @param {String} data the input, should be in the format of
+         * @param {String} input the input, should be in the format of
          *                      <currency><number>[.<number><subcurrency>]
          * @returns {Number} the parsed data expressed in <subcurrency>
          */
-        function validate(data) {
+        function validate(input) {
             var currencySymbol = '\xA3',
                 subCurrencySymbol = 'p',
                 regexValidInput = /^\xA3?(\d+\.?\d+|\d*\.?\d+|\d+\.?\d*)p?$/,
@@ -36,46 +37,46 @@ PENNIES.utils = (function () {
                 validated = 0;
 
             // return immediately in case it's a plain decimal
-            if (typeof data === 'number' || data.match(regexInt)
+            if (typeof input === 'number' || input.match(regexInt)
             ) {
-                return parseInt(data);
+                return parseInt(input, 10);
             }
             // reject any bad input
-            else if (data.match(regexValidInput) === null) {
+            else if (input.match(regexValidInput) === null) {
                 this.messages.push('Bad input format');
                 return validated;
             }
 
             // value with pound symbol
-            if (data.match(regexPoundFull)) {
+            if (input.match(regexPoundFull)) {
                 // strip leading currency sign
-                data = data.replace(currencySymbol, '');
+                input = input.replace(currencySymbol, '');
 
                 // cleanup pence symbol
-                if (data.match(regexPence)) {
-                    data = data.replace(subCurrencySymbol, '');
+                if (input.match(regexPence)) {
+                    input = input.replace(subCurrencySymbol, '');
                 }
                 // add leading decimals if missing
-                if (data.match(regexDecimalDot) === null) {
-                    if (data.match(regexInt)) {
-                        data += '.';
+                if (input.match(regexDecimalDot) === null) {
+                    if (input.match(regexInt)) {
+                        input += '.';
                     }
-                    data += '00';
+                    input += '00';
                 }
             }
 
             // strip out pence symbol if still there
-            if (data.match(regexPence)) {
-                data = data.replace(subCurrencySymbol, '');
+            if (input.match(regexPence)) {
+                input = input.replace(subCurrencySymbol, '');
             }
 
-            // convert the decimal into integer
-            if (data.match(regexDecimalDot)) {
-                validated = decimalToInt(data);
+            // convert the float into integer
+            if (input.match(regexDecimalDot)) {
+                validated = floatToInt(input);
             }
             // otherwise it's already an integer
-            else if (data.match(regexDecimalDot) === null) {
-                validated = parseInt(data);
+            else if (input.match(regexDecimalDot) === null) {
+                validated = parseInt(input, 10);
             }
 
             return validated;
@@ -102,45 +103,46 @@ PENNIES.utils = (function () {
      * Will convert a decimal point number into an integer, rounding it when possible.
      * If an integer is passed, it will be returned as float.
      *
-     * @param {String, Number} decimalValue the value with decimal point
-     * @param {Number} [precision]  the precision the resulting integer should be rounded to
+     * @param {String, Number} floatValue  the value with decimal point
+     * @param {Number}         [precision] the precision the resulting integer should be rounded to
+     *                                     defaults to 2
      * @returns {Number}
      */
-    function decimalToInt(decimalValue, precision) {
-        var decimalSplit, i;
+    function floatToInt(floatValue, precision) {
+        var floatSplit, i;
 
         // set a default value for the precision
         if (arguments.length === 1 || typeof precision !== 'Number') {
             precision = 2;
         }
         // convert the decimalValue into a string
-        if (typeof decimalValue === 'Number') {
-            decimalValue = decimalValue.toString();
+        if (typeof floatValue === 'Number') {
+            floatValue = floatValue.toString();
         }
 
-        decimalSplit = decimalValue.split('.');
+        floatSplit = floatValue.split('.');
 
-        if (decimalSplit[0] === '') {
-            decimalSplit[0] = '0';
+        if (floatSplit[0] === '') {
+            floatSplit[0] = '0';
+        }
+        if (typeof floatSplit[1] === 'undefined') {
+            floatSplit[1] = '';
         }
 
-        if (typeof decimalSplit[1] === 'undefined') {
-            decimalSplit[1] = '';
-        }
-        if (decimalSplit[1].length < precision) {
-            for (i=0; i < (precision - decimalSplit[1].length); i+=1) {
-                decimalSplit[1] += '0';
+        if (floatSplit[1].length < precision) {
+            for (i=0; i < (precision - floatSplit[1].length); i+=1) {
+                floatSplit[1] += '0';
             }
         }
-        else if (decimalSplit[1].length > precision) {
-            decimalSplit[1] = roundInt(decimalSplit[1], precision);
+        else if (floatSplit[1].length > precision) {
+            floatSplit[1] = roundInt(floatSplit[1], precision);
         }
 
-        return parseInt(decimalSplit[0] + decimalSplit[1]);
+        return parseInt(floatSplit[0] + floatSplit[1], 10);
     }
 
     /**
-     * Will round any integer value to the given precision
+     * Will round any integer value to the given amount of numbers
      *
      * @param {String} value     the value to round
      * @param {Number} precision
