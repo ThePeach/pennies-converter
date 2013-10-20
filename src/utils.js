@@ -36,6 +36,9 @@ PENNIES.utils = (function () {
                 regexDecimalDot = /^\d*\.\d+/,
                 validated = 0;
 
+            // reset error messages
+            this.messages = [];
+
             if (arguments.length < 1) {
                 throw new Error('No input');
             }

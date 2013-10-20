@@ -84,6 +84,7 @@ describe('Utils', function () {
             for (i=0; i<values.length; i+=1) {
                 expect(Validator.validate(values[i])).toEqual(0);
                 expect(Validator.hasErrors()).toBeTruthy();
+                expect(Validator.messages.length).toEqual(1);
             }
         });
 
