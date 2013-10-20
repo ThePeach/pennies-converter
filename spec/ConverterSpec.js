@@ -1,7 +1,10 @@
+/*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, noarg:true, noempty:true, nonew:true, undef:true, strict:true, browser:true */
+/*global PENNIES, describe, it, expect */
 /**
  * Basic set of tests for the converter
  */
 describe('Converter', function () {
+    'use strict';
     var Converter = PENNIES.Converter;
 
     it('should return the right calculated amount', function () {
@@ -14,8 +17,18 @@ describe('Converter', function () {
             ],
             i;
 
-        for (i in values) {
+        for (i=0; i<values.length; i+=1) {
             expect(Converter.convert(values[i])).toBeSimilar(expected[i]);
+        }
+    });
+
+    it('should throw an error if the input is badly formatted', function () {
+        /*jshint loopfunc:true */
+        var values = [ null, '', 'x', '1', '1.4', 1.4],
+            i;
+
+        for (i=0; i<values.length; i+=1) {
+            expect(function () { Converter.convert(values[i]); }).toThrow(new Error('Wrong input type'));
         }
     });
 });
